@@ -5,7 +5,7 @@ from flask_cors import CORS  # Impor CORS
 app = Flask(__name__)
 
 # Izinkan CORS hanya untuk origin website Anda dan endpoint /predict
-CORS(app, resources={r"/predict": {"origins": "http://127.0.0.1:5503"}}) 
+CORS(app, resources={r"/predict": {"origins": "https://maproove.netlify.app/"}}) 
 
 # Muat model prediksi
 with open('model_svm_prediksi.pkl', 'rb') as f:
