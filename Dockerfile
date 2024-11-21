@@ -12,12 +12,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     gcc \
     libatlas-base-dev \
+    liblapack-dev \
+    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
-# Instal numpy secara terpisah terlebih dahulu untuk menghindari masalah kompilasi
-RUN pip install --no-cache-dir numpy>=1.21,<1.25
-
-# Instal dependensi lain dari requirements.txt
+# Instal dependensi dari requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Ekspos port 5000 (port Flask)
