@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libatlas-base-dev \
     && rm -rf /var/lib/apt/lists/*
 
-# Instal numpy secara terpisah terlebih dahulu
+# Instal numpy secara terpisah terlebih dahulu untuk menghindari masalah kompilasi
 RUN pip install --no-cache-dir numpy>=1.21,<1.25
 
 # Instal dependensi lain dari requirements.txt
