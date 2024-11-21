@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Salin file yang diperlukan ke dalam container
-COPY api.py model_svm_prediksi.pkl requirements.txt ./
+COPY api.py model_svm_prediksi.pkl requirements.txt ./ 
 
 # Instal dependensi sistem yang diperlukan untuk numpy
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -19,8 +19,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Instal dependensi dari requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Instal Gunicorn untuk server produksi
+RUN pip install gunicorn
+
 # Ekspos port 5000 (port Flask)
 EXPOSE 5000
 
-# Jalankan aplikasi Flask
-CMD ["python", "api.py"]
+# Gunakan Gunicorn untuk menjalankan aplikasi Flask
+CMD ["gunicorn", "-b", "0.0.0.0:5000", "api:app"]
